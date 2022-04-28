@@ -1,0 +1,72 @@
+.contacts{
+    h1,h3{
+        text-align: center;
+    }
+}
+
+.contacts-form{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    label{
+        margin-right: 10px;
+    }
+    input{
+        border-radius: 5px;
+    }
+}
+.contact-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-bottom: 1px solid black;
+    p{
+        
+        margin: 5px;
+    }
+    &__name{
+        
+        &::before{
+            content: 'name';
+            font-size: 10px;
+            margin-right: 5px;
+        }
+    }
+    &__surname{
+        font-weight: bold;
+        &::before{
+            content: 'surname';
+            font-weight: normal;
+            font-size: 10px;
+            margin-right: 5px;
+        }
+    }
+    &__phone{
+        color: brown;
+        font-style: italic;
+        &::before{
+            content: 'tel';
+            font-weight: normal;
+            font-size: 10px;
+            margin-right: 5px;
+        }
+    }
+    button {
+        cursor: pointer;
+        color: white;
+        background-color: rgb(241, 1, 1);
+        font-weight: bold;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin:5px 20px;
+        border: none;
+        &:hover{
+            -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 0px 5px rgba(28,199,42,0); 
+            box-shadow: 0px 10px 13px -7px #000000, 5px 5px 0px 5px rgba(28,199,42,0);
+            transform: scale(1.05);
+            transition: all .2s;
+        }
+    }
+}
