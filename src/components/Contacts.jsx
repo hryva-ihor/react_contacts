@@ -65,6 +65,8 @@ export const Contacts = () => {
       case "setNewPhoneInputText":
         setNewPhoneInputText(e.target.value);
         break;
+      default:
+        alert("something wrong");
     }
   };
   return (
