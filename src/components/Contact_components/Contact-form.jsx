@@ -2,7 +2,7 @@ export const ContactForm = (props) => {
   return (
     <div>
       <form className="contacts-form" action="#">
-        <div>
+        <div className="contacts-form__input">
           <label htmlFor="setNewNameInputText">Name</label>
           <input
             onChange={props.inputValue}
@@ -11,7 +11,7 @@ export const ContactForm = (props) => {
             name="setNewNameInputText"
           />
         </div>
-        <div>
+        <div className="contacts-form__input">
           <label htmlFor="setNewSurnameInputText">Surname</label>
           <input
             onChange={props.inputValue}
@@ -20,8 +20,8 @@ export const ContactForm = (props) => {
             name="setNewSurnameInputText"
           />
         </div>
-        <div>
-          <label htmlFor="setNewPhoneInputText">Tel</label>
+        <div className="contacts-form__input">
+          <label htmlFor="setNewPhoneInputText">Phone</label>
           <input
             onChange={props.inputValue}
             value={props.PhoneInputValue}

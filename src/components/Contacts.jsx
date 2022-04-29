@@ -20,7 +20,7 @@ export const Contacts = () => {
 
   const addNewContact = (e) => {
     e.preventDefault();
-    if (newNameInputText && newSurnameInputText && newPhoneInputText) {
+    if ((newNameInputText || newSurnameInputText) && newPhoneInputText) {
       const newContact = {
         name: newNameInputText,
         surname: newSurnameInputText,
