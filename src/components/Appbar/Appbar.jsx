@@ -153,8 +153,7 @@ const Appbar = () => {
             </Box>
           </Box>
         </Toolbar>
-
-        <ModalLogout />
+        {openModal ? <ModalLogout /> : ``}
       </Container>
     </AppBar>
   );
