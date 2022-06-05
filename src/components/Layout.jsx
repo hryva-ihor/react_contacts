@@ -1,6 +1,7 @@
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
+
 import Appbar from "./Appbar/Appbar";
 
 const Layout = () => {

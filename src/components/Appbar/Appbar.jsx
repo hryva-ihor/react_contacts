@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -10,9 +10,11 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Box from "@mui/material/Box";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Appbar.scss";
 import useAuth from "../../hook/useAuth";
+import { ModalLogout } from "../ModalLogout";
+import { ModalContext } from "../../context/ModalContext";
 
 const Appbar = () => {
   const pages = [
@@ -20,10 +22,9 @@ const Appbar = () => {
     { title: "Albums page", href: "/albumspage" },
     // { title: "About", href: "/aboutpage" },
   ];
-
+  const { openModal, setOpenModal } = useContext(ModalContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const { user, signOut } = useAuth();
-
+  const { user } = useAuth();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -31,7 +32,7 @@ const Appbar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  const navigate = useNavigate();
+
   return (
     <AppBar position="static">
       <Container>
@@ -133,7 +134,7 @@ const Appbar = () => {
               {user ? (
                 <Button
                   onClick={() => {
-                    signOut(() => navigate("/", { replace: true }));
+                    setOpenModal(true);
                   }}
                   sx={{ color: "white", textTransform: "none" }}
                 >
@@ -152,6 +153,8 @@ const Appbar = () => {
             </Box>
           </Box>
         </Toolbar>
+
+        <ModalLogout />
       </Container>
     </AppBar>
   );

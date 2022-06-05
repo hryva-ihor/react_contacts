@@ -12,58 +12,63 @@ import Editalbum from "./pages/Editalbum";
 import { Loginpage } from "./pages/Loginpage";
 import { RequireAuth } from "./hoc/RequireAuth";
 import { AuthProvider } from "./hoc/AuthProvider";
+import { useState } from "react";
+import { ModalContext } from "./context/ModalContext";
 
 function App() {
+  const [openModal, setOpenModal] = useState(false);
   return (
-    <Box
-      width="1800px"
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-    >
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Homepage />} />
-            <Route
-              path="albumspage"
-              element={
-                <RequireAuth>
-                  <Albumspage />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="albumspage/:id"
-              element={
-                <RequireAuth>
-                  <AlbumSinglepage />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="albumspage/:id/edit"
-              element={
-                <RequireAuth>
-                  <Editalbum />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="albumspage/new"
-              element={
-                <RequireAuth>
-                  <Createalbum />
-                </RequireAuth>
-              }
-            />
-            <Route path="aboutpage" element={<Abautpage />} />
-            <Route path="login" element={<Loginpage />} />
-            <Route path="*" element={<Notfoundpage />} />
-          </Route>
-        </Routes>
-      </AuthProvider>
-    </Box>
+    <ModalContext.Provider value={{ openModal, setOpenModal }}>
+      <Box
+        width="1800px"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Homepage />} />
+              <Route
+                path="albumspage"
+                element={
+                  <RequireAuth>
+                    <Albumspage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="albumspage/:id"
+                element={
+                  <RequireAuth>
+                    <AlbumSinglepage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="albumspage/:id/edit"
+                element={
+                  <RequireAuth>
+                    <Editalbum />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="albumspage/new"
+                element={
+                  <RequireAuth>
+                    <Createalbum />
+                  </RequireAuth>
+                }
+              />
+              <Route path="aboutpage" element={<Abautpage />} />
+              <Route path="login" element={<Loginpage />} />
+              <Route path="*" element={<Notfoundpage />} />
+            </Route>
+          </Routes>
+        </AuthProvider>
+      </Box>
+    </ModalContext.Provider>
   );
 }
 
