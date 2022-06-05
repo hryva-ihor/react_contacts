@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -19,7 +19,6 @@ const Editalbum = () => {
     validURL,
     album,
   } = useAlbums();
-  // const [album, setAlbum] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
 
