@@ -14,6 +14,7 @@ import { RequireAuth } from "./hoc/RequireAuth";
 import { AuthProvider } from "./hoc/AuthProvider";
 import { useState } from "react";
 import { ModalContext } from "./context/ModalContext";
+import { Newspage } from "./pages/Newspage";
 
 function App() {
   const [openModal, setOpenModal] = useState(false);
@@ -61,7 +62,17 @@ function App() {
                   </RequireAuth>
                 }
               />
+              <Route
+                path="newsspage"
+                element={
+                  <RequireAuth>
+                    <Newspage />
+                  </RequireAuth>
+                }
+              />
               <Route path="aboutpage" element={<Abautpage />} />
+              {/* <Route path="newsspage" element={<Newspage />} /> */}
+
               <Route path="login" element={<Loginpage />} />
               <Route path="*" element={<Notfoundpage />} />
             </Route>

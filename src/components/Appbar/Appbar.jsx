@@ -18,9 +18,9 @@ import { ModalContext } from "../../context/ModalContext";
 
 const Appbar = () => {
   const pages = [
-    { title: "Homepage", href: "/" },
-    { title: "Albums page", href: "/albumspage" },
-    // { title: "About", href: "/aboutpage" },
+    { title: "Home", href: "/" },
+    { title: "Albums", href: "/albumspage" },
+    { title: "News", href: "/newsspage" },
   ];
   const { openModal, setOpenModal } = useContext(ModalContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
