@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { getProstsData } from "../services/post_service";
 
 const Newspage = (props) => {
-  console.log(props);
   const [posts, setPosts] = useState([]);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
@@ -12,7 +11,6 @@ const Newspage = (props) => {
 
   useEffect(() => {
     getProstsData(`query=${query}&page=${page - 1}`).then(({ data }) => {
-      console.log(data);
       setPosts(data.hits);
       setPageQty(data.nbPages);
       // если количество страниц меньше стандартной

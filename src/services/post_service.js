@@ -1,5 +1,5 @@
 import axios from "axios";
-const POST_URL = `http://hn.algolia.com/api/v1/search?`;
+const POST_URL = `https://hn.algolia.com/api/v1/search?`;
 // const POST_URI = `albums`;
 
 export const getProstsData = (page) => {
