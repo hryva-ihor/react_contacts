@@ -28,7 +28,8 @@ function App() {
       >
         <AuthProvider>
           <Routes>
-            <Route path="/react_contacts/build/" element={<Layout />}>
+            // build path for layout: "/react_contacts/build/"
+            <Route path="/" element={<Layout />}>
               <Route index element={<Homepage />} />
               <Route
                 path="albumspage"
