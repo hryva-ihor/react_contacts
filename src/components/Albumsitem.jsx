@@ -8,7 +8,7 @@ const Albumsitem = (props) => {
   const album = props.album;
   // console.log(album);
   return (
-    <ImageListItem key={album.img}>
+    <ImageListItem sx={{ minHeight: "100px" }} key={album.img}>
       <img src={`${album.img}`} alt={album.title} loading="lazy" />
       <ImageListItemBar
         title={album.title}
