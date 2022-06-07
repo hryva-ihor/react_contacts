@@ -87,11 +87,9 @@ const Appbar = () => {
             >
               {pages.map((page, index) => (
                 <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Button>
-                    <NavLink className="nav-link nav-link__dark" to={page.href}>
-                      {page.title}
-                    </NavLink>
-                  </Button>
+                  <NavLink className="nav-link nav-link__dark" to={page.href}>
+                    <Button>{page.title}</Button>
+                  </NavLink>
                 </MenuItem>
               ))}
             </Menu>
@@ -118,15 +116,15 @@ const Appbar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, index) => (
-              <Button
-                key={index}
-                onClick={handleCloseNavMenu}
-                sx={{ m: 2, color: "white", display: "block" }}
-              >
-                <NavLink className="nav-link" to={page.href}>
+              <NavLink className="nav-link" to={page.href}>
+                <Button
+                  key={index}
+                  onClick={handleCloseNavMenu}
+                  sx={{ m: 2, color: "white", display: "block" }}
+                >
                   {page.title}
-                </NavLink>
-              </Button>
+                </Button>
+              </NavLink>
             ))}
           </Box>
           <Box>

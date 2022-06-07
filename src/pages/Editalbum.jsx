@@ -20,6 +20,7 @@ const Editalbum = () => {
     album,
   } = useAlbums();
   const { id } = useParams();
+  let ID = id.replace(/[^\d]/g, "");
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -28,7 +29,7 @@ const Editalbum = () => {
   const goToAlbumsPage = () => {
     navigate(`/albumspage`);
   };
-  let ID = id.replace(/[^\d]/g, "");
+
   useEffect(() => {
     getAlbumItem(ID);
   }, [id]);

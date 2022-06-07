@@ -17,7 +17,7 @@ const AlbumSinglepage = () => {
     navigate(-1);
   };
   const goAlbumspage = () => {
-    navigate({ pathname: `/albumspage` });
+    navigate("/albumspage");
   };
   const ID = id.replace(/[^\d]/g, "");
   useEffect(() => {
@@ -60,7 +60,7 @@ const AlbumSinglepage = () => {
               </Link>
             </Button>
             <Button onClick={handleDelet} size="small">
-              Delet album
+              Remove album
             </Button>
           </CardActions>
         </Card>

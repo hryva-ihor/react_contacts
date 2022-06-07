@@ -1,9 +1,8 @@
 import React from "react";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-// import IconButton from "@mui/material/IconButton";
-// import InfoIcon from "@mui/icons-material/Info";
 import { Link as RouterLink } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const Albumsitem = (props) => {
   const album = props.album;
@@ -11,9 +10,17 @@ const Albumsitem = (props) => {
   return (
     <ImageListItem key={album.img}>
       <img src={`${album.img}`} alt={album.title} loading="lazy" />
-      <RouterLink to={`/albumspage/:${album.id}`}>
-        <ImageListItemBar title={album.title} subtitle={album.subtitle} />
-      </RouterLink>
+      <ImageListItemBar
+        title={album.title}
+        subtitle={album.subtitle}
+        actionIcon={
+          <RouterLink className="nav-link" to={`/albumspage/:${album.id}`}>
+            <Button size="small" sx={{ m: 2 }} variant="contained">
+              about
+            </Button>
+          </RouterLink>
+        }
+      />
     </ImageListItem>
   );
 };

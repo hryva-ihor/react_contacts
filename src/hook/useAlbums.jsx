@@ -58,7 +58,7 @@ const useAlbums = () => {
     const subtitle = form.subtitle.value;
     const about = form.about.value;
     const imgURL = form.imgURL.value;
-    if (form && title && about && validImgURLInput(imgURL)) {
+    if (subtitle && title && about && validImgURLInput(imgURL)) {
       setTitle("");
       setSubitle("");
       setAbout("");
@@ -140,7 +140,7 @@ const useAlbums = () => {
     deletAlbum(id);
     const newAlbumsData = albums.filter((album) => album.id !== id);
     setAlbums(newAlbumsData);
-    setInterval(() => {
+    setTimeout(() => {
       goAlbumspage();
     }, 500);
   };
