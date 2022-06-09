@@ -24,7 +24,8 @@ const Appbar = () => {
   ];
   const { openModal, setOpenModal } = useContext(ModalContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const { user } = useAuth();
+  const { email } = useAuth();
+  const getStorageEmail = localStorage.getItem("email");
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -116,9 +117,8 @@ const Appbar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, index) => (
-              <NavLink className="nav-link" to={page.href}>
+              <NavLink key={index} className="nav-link" to={page.href}>
                 <Button
-                  key={index}
                   onClick={handleCloseNavMenu}
                   sx={{ m: 2, color: "white", display: "block" }}
                 >
@@ -129,23 +129,23 @@ const Appbar = () => {
           </Box>
           <Box>
             <Box sx={{ color: "white" }}>
-              {user ? (
+              {email ? (
                 <Button
                   onClick={() => {
                     setOpenModal(true);
                   }}
                   sx={{ color: "white", textTransform: "none" }}
                 >
-                  Log out
+                  Sign out
                   <Typography sx={{ color: "lightgreen" }}>
                     {" "}
                     {"\u00A0"}
-                    {user}
+                    {email}
                   </Typography>
                 </Button>
               ) : (
                 <NavLink className="nav-link" to="/login">
-                  Log in
+                  Sign in
                 </NavLink>
               )}
             </Box>

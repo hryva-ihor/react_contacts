@@ -6,18 +6,24 @@ import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hook/useAuth";
 import { ModalContext } from "../context/ModalContext";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../store/slices/userSlice";
 
 export const ModalLogout = () => {
   const { openModal, setOpenModal } = useContext(ModalContext);
-  const { user, signOut } = useAuth();
-
+  const { email } = useAuth();
+  const dispatch = useDispatch();
   // const [open, setOpen] = React.useState(Boolean);
   const navigate = useNavigate();
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
   const handleLeave = () => {
-    signOut(() => navigate("/", { replace: true }));
+    dispatch(removeUser());
+    navigate("/", { replace: true });
     handleClose();
+    localStorage.removeItem("email");
+    localStorage.removeItem("id");
+    localStorage.removeItem("token");
   };
   const style = {
     position: "absolute",
@@ -42,7 +48,7 @@ export const ModalLogout = () => {
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             <Typography sx={{ color: "green" }} variant="span">
-              {user}
+              {email}
             </Typography>
             , do you want to log out?
           </Typography>

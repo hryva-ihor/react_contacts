@@ -3,12 +3,11 @@ import { Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { getProstsData } from "../services/post_service";
 
-const Newspage = (props) => {
+const Newspage = () => {
   const [posts, setPosts] = useState([]);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [pageQty, setPageQty] = useState(0);
-
   useEffect(() => {
     getProstsData(`query=${query}&page=${page - 1}`).then(({ data }) => {
       setPosts(data.hits);
@@ -26,7 +25,6 @@ const Newspage = (props) => {
         label="search news"
         value={query}
         onChange={(e) => {
-          console.log(e.target.value);
           setQuery(e.target.value);
         }}
       />

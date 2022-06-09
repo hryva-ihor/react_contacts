@@ -1,56 +1,69 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router";
 import useAuth from "../hook/useAuth";
-
-import Box from "@mui/material/Box";
-import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
-import Input from "@mui/material/Input";
-import InputLabel from "@mui/material/InputLabel";
-import { Button } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { AuthForm } from "../components/AuthForm";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { setUser } from "store/slices/userSlice";
+import { Box } from "@mui/system";
 
 const Loginpage = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const { signIn } = useAuth();
-  const fromPage = location.state?.from?.pathname || "/";
-  const handleSubmit = (e) => {
+  // const location = useLocation();
+  // const { signIn } = useAuth();
+  // const fromPage = location.state?.from?.pathname || "/";
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const form = e.target;
+  //   const user = form.username.value;
+  //   signIn(user, () => {
+  //     navigate(fromPage, { replace: true });
+  //   });
+  // };
+  //   // localStorage.setItem("user", String(newUser));
+  // };
+  // const signOut = (cb) => {
+  //   setUser(null);
+  //   cb();
+  //   // localStorage.removeItem("user");
+  const handleLogin = (e, email, pass) => {
     e.preventDefault();
-    const form = e.target;
-    const user = form.username.value;
-    signIn(user, () => {
-      navigate(fromPage, { replace: true });
-    });
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, pass)
+      .then(({ user }) => {
+        console.log(user);
+        dispatch(
+          setUser({
+            email: user.email,
+            token: user.accessToken,
+            id: user.uid,
+          })
+        );
+        localStorage.setItem("email", String(user.email));
+        localStorage.setItem("token", String(user.accessToken));
+        localStorage.setItem("id", String(user.uid));
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(errorCode);
+        switch (errorCode) {
+          case "auth/user-not-found":
+            alert("user - not - found");
+            break;
+          case "auth/wrong-password":
+            alert("wrong-password");
+            break;
+          default:
+            break;
+        }
+      });
   };
 
   return (
-    <Box
-      component="form"
-      sx={{
-        "& > :not(style)": { m: 1 },
-      }}
-      noValidate
-      autoComplete="off"
-      display="flex"
-      alignItems="center"
-      flexDirection="column"
-      mt="10%"
-      onSubmit={handleSubmit}
-    >
-      <FormControl variant="standard">
-        <InputLabel htmlFor="component-helper">Name</InputLabel>
-        <Input
-          name="username"
-          id="component-helper"
-          aria-describedby="component-helper-text"
-        />
-        <FormHelperText id="component-helper-text">
-          Enter your name
-        </FormHelperText>
-      </FormControl>
-      <Button type="submit" variant="outlined">
-        Submit
-      </Button>
+    <Box>
+      <AuthForm title="Sign in" handleSubmit={handleLogin} />
     </Box>
   );
 };

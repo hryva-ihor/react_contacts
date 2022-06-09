@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+// import { useDispatch } from "react-redux";
+// import { fetchAlbums } from "../store/todoSlice";
 import {
   addNewAlbum,
   deletAlbum,
@@ -8,6 +10,7 @@ import {
 } from "../services/album-services";
 
 const useAlbums = () => {
+  // const dispatch = useDispatch();
   const [albums, setAlbums] = useState([]);
   const [album, setAlbum] = useState({});
   const [title, setTitle] = useState("");
@@ -18,6 +21,7 @@ const useAlbums = () => {
   // const [searchParams, setSearchParams] = useSearchParams();
   // const albumQuery = searchParams.get("album") || ``;
   useEffect(() => {
+    // dispatch(fetchAlbums());
     getAlbumsData().then(({ data }) => setAlbums(data.reverse()));
   }, []);
 

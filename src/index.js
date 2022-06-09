@@ -4,9 +4,11 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Box } from "@mui/system";
 import { Provider } from "react-redux";
-import store from "./store/store";
+import { store } from "./store/store";
+import "./firebase";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-console.log(store);
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>

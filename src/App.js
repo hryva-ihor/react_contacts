@@ -15,8 +15,11 @@ import { AuthProvider } from "./hoc/AuthProvider";
 import { useState } from "react";
 import { ModalContext } from "./context/ModalContext";
 import { Newspage } from "./pages/Newspage";
+import Registerpage from "./pages/Registerpage";
+// import { useSelector } from "react-redux";
 
 function App() {
+  // const { status, error } = useSelector((state) => state.albums);
   const [openModal, setOpenModal] = useState(false);
   return (
     <ModalContext.Provider value={{ openModal, setOpenModal }}>
@@ -72,9 +75,8 @@ function App() {
                 }
               />
               <Route path="aboutpage" element={<Abautpage />} />
-              {/* <Route path="newsspage" element={<Newspage />} /> */}
-
               <Route path="login" element={<Loginpage />} />
+              <Route path="register" element={<Registerpage />} />
               <Route path="*" element={<Notfoundpage />} />
             </Route>
           </Routes>

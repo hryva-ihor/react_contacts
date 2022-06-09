@@ -1,8 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import albumReducer from "./albumSlice";
+import userReducer from "./slices/userSlice";
 
-export default configureStore({
+const { configureStore } = require("@reduxjs/toolkit");
+
+export const store = configureStore({
   reducer: {
-    albums: albumReducer,
+    user: userReducer,
   },
 });
