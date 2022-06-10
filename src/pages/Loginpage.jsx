@@ -1,6 +1,6 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router";
-import useAuth from "../hook/useAuth";
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
+
 import { useDispatch } from "react-redux";
 import { AuthForm } from "../components/AuthForm";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -10,23 +10,10 @@ import { Box } from "@mui/system";
 const Loginpage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const location = useLocation();
-  // const { signIn } = useAuth();
-  // const fromPage = location.state?.from?.pathname || "/";
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const form = e.target;
-  //   const user = form.username.value;
-  //   signIn(user, () => {
-  //     navigate(fromPage, { replace: true });
-  //   });
-  // };
-  //   // localStorage.setItem("user", String(newUser));
-  // };
-  // const signOut = (cb) => {
-  //   setUser(null);
-  //   cb();
-  //   // localStorage.removeItem("user");
+  const [invalidEmail, setInvalidEmail] = useState(false);
+  const [invalidPass, setInvalidPass] = useState(false);
+  const [invalidPassText, setInvalidPassText] = useState("");
+  const [invalidEmailText, setInvalidEmailText] = useState("");
   const handleLogin = (e, email, pass) => {
     e.preventDefault();
     const auth = getAuth();
@@ -50,10 +37,30 @@ const Loginpage = () => {
         console.log(errorCode);
         switch (errorCode) {
           case "auth/user-not-found":
-            alert("user - not - found");
+            setInvalidEmail(true);
+            setInvalidEmailText("User not found");
+            // alert("user not found");
+            setInvalidPass(false);
+
+            break;
+          case "auth/invalid-email":
+            setInvalidEmail(true);
+            setInvalidEmailText("Invalid email");
+            // alert("invalid email");
+            setInvalidPass(false);
+
             break;
           case "auth/wrong-password":
-            alert("wrong-password");
+            // alert("wrong-password");
+            setInvalidPass(true);
+            setInvalidPassText("Wrong password");
+            setInvalidEmail(false);
+            break;
+          case "auth/weak-password":
+            // alert("weak password, min 6 symbols");
+            setInvalidPass(true);
+            setInvalidEmail(false);
+            setInvalidPassText("Weak password, min 6 symbols");
             break;
           default:
             break;
@@ -63,7 +70,14 @@ const Loginpage = () => {
 
   return (
     <Box>
-      <AuthForm title="Sign in" handleSubmit={handleLogin} />
+      <AuthForm
+        invalidPass={invalidPass}
+        invalidEmail={invalidEmail}
+        invalidPassText={invalidPassText}
+        invalidEmailText={invalidEmailText}
+        title="Sign in"
+        handleSubmit={handleLogin}
+      />
     </Box>
   );
 };

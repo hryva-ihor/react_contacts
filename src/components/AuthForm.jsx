@@ -9,13 +9,24 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 
 export const AuthForm = (props) => {
-  const { title, handleSubmit } = props;
+  const {
+    title,
+    handleSubmit,
+    invalidEmail,
+    invalidPass,
+    invalidPassText,
+    invalidEmailText,
+  } = props;
+  console.log(invalidPassText, invalidEmailText);
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const location = useLocation();
-  const [btnVisible, setBtnVisible] = useState(true);
+  const [btnVisibleSignUp, setBtnVisibleSignUp] = useState(true);
+  const [btnVisibleSignIn, setBtnVisibleSignIn] = useState(true);
   useMemo(() => {
-    if (location.pathname === "/register") setBtnVisible(!btnVisible);
+    if (location.pathname === "/register")
+      setBtnVisibleSignUp(!btnVisibleSignUp);
+    if (location.pathname === "/login") setBtnVisibleSignIn(!btnVisibleSignIn);
   }, [location.pathname]);
   return (
     <Box
@@ -34,6 +45,7 @@ export const AuthForm = (props) => {
       <FormControl variant="standard">
         <InputLabel htmlFor="component-helper-email">Email</InputLabel>
         <Input
+          error={invalidEmail}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -44,12 +56,13 @@ export const AuthForm = (props) => {
           aria-describedby="component-helper-text"
         />
         <FormHelperText id="component-helper-text">
-          Enter your email
+          {invalidEmail ? invalidEmailText : `Enter your email`}
         </FormHelperText>
       </FormControl>
       <FormControl variant="standard">
         <InputLabel htmlFor="component-helper-pass">Password</InputLabel>
         <Input
+          error={invalidPass}
           onChange={(e) => {
             setPass(e.target.value);
           }}
@@ -60,7 +73,7 @@ export const AuthForm = (props) => {
           aria-describedby="component-helper-text"
         />
         <FormHelperText id="component-helper-text">
-          Enter your password
+          {invalidPass ? invalidPassText : `Enter your password`}
         </FormHelperText>
       </FormControl>
       <Button
@@ -72,10 +85,15 @@ export const AuthForm = (props) => {
       >
         Submit
       </Button>
-      {btnVisible && (
-        <Link style={{ textDecoration: "none" }} to="/register">
-          <Button>Sign up</Button>
-        </Link>
+      {btnVisibleSignUp && (
+        <Typography>
+          Don't have an account yet? <Link to="/register">Sign Up</Link>
+        </Typography>
+      )}
+      {btnVisibleSignIn && (
+        <Typography>
+          Already have an accaunt? <Link to="/login">Sign in</Link>
+        </Typography>
       )}
     </Box>
   );

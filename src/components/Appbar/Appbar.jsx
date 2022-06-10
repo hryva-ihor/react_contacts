@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Box from "@mui/material/Box";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./Appbar.scss";
 
 import { ModalLogout } from "../ModalLogout";
@@ -144,9 +144,9 @@ const Appbar = () => {
                   </Typography>
                 </Button>
               ) : (
-                <NavLink className="nav-link" to="/login">
-                  Sign in
-                </NavLink>
+                <Link style={{ textDecoration: "none" }} to="/login">
+                  <Button sx={{ color: "white" }}>Sign in</Button>
+                </Link>
               )}
             </Box>
           </Box>
