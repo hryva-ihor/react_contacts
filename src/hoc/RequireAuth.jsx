@@ -21,7 +21,7 @@ const RequireAuth = ({ children }) => {
   }
 
   if (!email) {
-    return <Navigate to="/login" state={{ from: location }} />;
+    return <Navigate to="/login" stateFrom={{ from: location }} />;
   }
   return children;
 };

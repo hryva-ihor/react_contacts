@@ -12,9 +12,10 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Box from "@mui/material/Box";
 import { NavLink } from "react-router-dom";
 import "./Appbar.scss";
-import useAuth from "../../hook/useAuth";
+
 import { ModalLogout } from "../ModalLogout";
 import { ModalContext } from "../../context/ModalContext";
+import { useSelector } from "react-redux";
 
 const Appbar = () => {
   const pages = [
@@ -24,16 +25,15 @@ const Appbar = () => {
   ];
   const { openModal, setOpenModal } = useContext(ModalContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const { email } = useAuth();
+  const { email } = useSelector((state) => state.user);
   const getStorageEmail = localStorage.getItem("email");
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
+  console.log(getStorageEmail);
   return (
     <AppBar position="static">
       <Container>
@@ -129,7 +129,7 @@ const Appbar = () => {
           </Box>
           <Box>
             <Box sx={{ color: "white" }}>
-              {email ? (
+              {getStorageEmail || email ? (
                 <Button
                   onClick={() => {
                     setOpenModal(true);
@@ -140,7 +140,7 @@ const Appbar = () => {
                   <Typography sx={{ color: "lightgreen" }}>
                     {" "}
                     {"\u00A0"}
-                    {email}
+                    {getStorageEmail || email}
                   </Typography>
                 </Button>
               ) : (
