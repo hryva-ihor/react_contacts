@@ -57,6 +57,13 @@ const Registerpage = () => {
             setInvalidPass(false);
 
             break;
+          case "auth/email-already-in-use":
+            setInvalidEmail(true);
+            setInvalidEmailText("Email already in use");
+            // alert("invalid email");
+            setInvalidPass(false);
+
+            break;
           case "auth/wrong-password":
             // alert("wrong-password");
             setInvalidPass(true);
