@@ -6,12 +6,13 @@ import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hook/useAuth";
 import { ModalContext } from "../context/ModalContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../store/slices/userSlice";
 
 export const ModalLogout = () => {
   const { openModal, setOpenModal } = useContext(ModalContext);
-  const { email } = useAuth();
+  // const { email } = useAuth();
+  const { email } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   // const [open, setOpen] = React.useState(Boolean);
   const navigate = useNavigate();

@@ -17,6 +17,7 @@ import { ModalContext } from "./context/ModalContext";
 import { Newspage } from "./pages/Newspage";
 import Registerpage from "./pages/Registerpage";
 // import { useSelector } from "react-redux";
+import { ModalLogout } from "./components/ModalLogout";
 
 function App() {
   // const { status, error } = useSelector((state) => state.albums);
@@ -81,6 +82,7 @@ function App() {
             </Route>
           </Routes>
         </AuthProvider>
+        {openModal ? <ModalLogout /> : ``}
       </Box>
     </ModalContext.Provider>
   );

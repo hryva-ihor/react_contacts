@@ -13,7 +13,7 @@ import Box from "@mui/material/Box";
 import { NavLink, Link } from "react-router-dom";
 import "./Appbar.scss";
 
-import { ModalLogout } from "../ModalLogout";
+// import { ModalLogout } from "../ModalLogout";
 import { ModalContext } from "../../context/ModalContext";
 import { useSelector } from "react-redux";
 
@@ -151,7 +151,6 @@ const Appbar = () => {
             </Box>
           </Box>
         </Toolbar>
-        {openModal ? <ModalLogout /> : ``}
       </Container>
     </AppBar>
   );
