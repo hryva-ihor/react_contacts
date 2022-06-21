@@ -95,7 +95,7 @@ const Createalbum = () => {
             aria-describedby="component-helper-text"
           />
           <FormHelperText id="component-helper-text">
-            (https://---link---)
+            (https://---link---.jpg/jpeg/png)
           </FormHelperText>
         </FormControl>
         <Button type="submit" variant="outlined">

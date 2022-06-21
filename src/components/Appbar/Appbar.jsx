@@ -22,6 +22,7 @@ const Appbar = () => {
     { title: "Home", href: "/" },
     { title: "Albums", href: "/albumspage" },
     { title: "News", href: "/newsspage" },
+    { title: "Countries", href: "/countries" },
   ];
   const { openModal, setOpenModal } = useContext(ModalContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -33,7 +34,6 @@ const Appbar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  console.log(getStorageEmail);
   return (
     <AppBar position="static">
       <Container>

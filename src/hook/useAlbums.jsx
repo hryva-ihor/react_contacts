@@ -8,7 +8,6 @@ import {
   getAlbumsData,
   updateAlbum,
 } from "../services/album-services";
-
 const useAlbums = () => {
   // const dispatch = useDispatch();
   const [albums, setAlbums] = useState([]);
@@ -39,21 +38,18 @@ const useAlbums = () => {
         break;
       case "imgURL":
         setImgURL(e.target.value);
-        setValidURL(
-          e.target.value.split("/")[0] === "https:" &&
-            e.target.value.includes("https://", 0)
-        );
+        setValidURL(isImgLink(e.target.value));
         break;
       default:
         alert("something wrong");
     }
   };
-  const validImgURLInput = (imgURL) => {
-    if (imgURL.includes("https://", 0)) {
-      setValidURL(true);
-      return true;
-    }
-    return false;
+  const isImgLink = (url) => {
+    return (
+      String(url).match(
+        /^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gim
+      ) !== null
+    );
   };
   const handleSubmitEvent = (e, goBack) => {
     e.preventDefault();
@@ -62,7 +58,7 @@ const useAlbums = () => {
     const subtitle = form.subtitle.value;
     const about = form.about.value;
     const imgURL = form.imgURL.value;
-    if (subtitle && title && about && validImgURLInput(imgURL)) {
+    if (subtitle && title && about && validURL) {
       setTitle("");
       setSubitle("");
       setAbout("");
@@ -110,17 +106,14 @@ const useAlbums = () => {
         break;
       case "imgURL":
         setImgURL(e.target.value);
-        setValidURL(
-          e.target.value.split("/")[0] === "https:" &&
-            e.target.value.includes("https://", 0)
-        );
+        setValidURL(isImgLink(e.target.value));
         break;
       default:
         alert("something wrong");
     }
   };
   const handleSubmitEdit = (e, goToAlbumsPage, ID) => {
-    if (subtitle && title && about && validImgURLInput(imgURL)) {
+    if (subtitle && title && about && validURL) {
       e.preventDefault();
       const editAlbum = {
         title: title,
@@ -154,7 +147,6 @@ const useAlbums = () => {
     albums,
     album,
     handlerOnChangeInput,
-    validImgURLInput,
     handleSubmitEvent,
     title,
     subtitle,

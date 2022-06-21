@@ -18,6 +18,8 @@ import { Newspage } from "./pages/Newspage";
 import Registerpage from "./pages/Registerpage";
 // import { useSelector } from "react-redux";
 import { ModalLogout } from "./components/ModalLogout";
+import { Countrypage } from "pages/Countrypage";
+import { CountryAboute } from "pages/CountryAboute";
 
 function App() {
   // const { status, error } = useSelector((state) => state.albums);
@@ -32,7 +34,6 @@ function App() {
       >
         <AuthProvider>
           <Routes>
-            // build path for layout: "/react_contacts/build/"
             <Route path="/" element={<Layout />}>
               <Route index element={<Homepage />} />
               <Route
@@ -72,6 +73,22 @@ function App() {
                 element={
                   <RequireAuth>
                     <Newspage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="countries"
+                element={
+                  <RequireAuth>
+                    <Countrypage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="countries/:name"
+                element={
+                  <RequireAuth>
+                    <CountryAboute />
                   </RequireAuth>
                 }
               />
