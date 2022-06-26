@@ -3,9 +3,9 @@ import { Box } from "@mui/system";
 import React from "react";
 
 const CountrySearch = ({ search, setSearch, countriesName }) => {
-  const setSearchCountry = (e) => {
+  const setSearchCountry = (e, newInputValue) => {
     e.preventDefault();
-    setSearch(e.target.value);
+    setSearch(newInputValue);
   };
   return (
     <Box
@@ -18,6 +18,10 @@ const CountrySearch = ({ search, setSearch, countriesName }) => {
       autoComplete="off"
     >
       <Autocomplete
+        // onChange={setSearchCountry}
+        onInputChange={(e, newInputValue) => {
+          setSearchCountry(e, newInputValue);
+        }}
         freeSolo
         id="free-solo-2-demo"
         disableClearable
